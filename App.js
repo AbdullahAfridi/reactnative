@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
+
+import productsReducer from "./corona/reducers/products";
+import CoronaNavigator from "./navigation/CoronaNavigator";
+import ProjectOverView from "./screen/ProjectOverView";
+import FirstScreen from "./screen/FirstScreen";
+import Welcome from "./screen/Welcome";
+import { View } from "react-native";
+import Test from "./screen/Test";
+import SymptomScreen from "./screen/SymptomScreen";
+import SplashScreen from "./screen/SplashScree";
+
+const rootReducer = combineReducers({
+  products: productsReducer,
+});
+
+const store = createStore(rootReducer);
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <CoronaNavigator />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
